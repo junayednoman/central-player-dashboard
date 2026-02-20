@@ -19,8 +19,8 @@ export const navItems: TNavMain = [
     icon: <UserRoundCog />,
   },
   {
-    title: "Complaints",
-    url: "/dashboard/complaints",
+    title: "Content Moderation",
+    url: "/dashboard/content-moderation",
     icon: <CircleAlert />,
   },
   {
