@@ -49,13 +49,23 @@ jobs:
       - name: Deploy over SSH
         shell: bash
         run: |
-          ssh -p "${{ secrets.VPS_PORT }}" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" << EOF
-          set -e
-          cd "${{ secrets.VPS_APP_DIR }}"
-          git fetch origin
-          git reset --hard origin/main
-          npm ci
-          npm run build
-          pm2 restart myne-dashboard
-          pm2 save
-          EOF
+          ssh -p "${{ secrets.VPS_PORT }}" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "bash -lc '
+            set -e
+
+            export NVM_DIR=\"$HOME/.nvm\"
+            [ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"
+            [ -s \"$HOME/.profile\" ] && . \"$HOME/.profile\" || true
+            [ -s \"$HOME/.bashrc\" ] && . \"$HOME/.bashrc\" || true
+
+            command -v node >/dev/null 2>&1 || { echo \"node: command not found\"; exit 127; }
+            command -v npm >/dev/null 2>&1 || { echo \"npm: command not found\"; exit 127; }
+            command -v pm2 >/dev/null 2>&1 || { echo \"pm2: command not found\"; exit 127; }
+
+            cd \"${{ secrets.VPS_APP_DIR }}\"
+            git fetch origin
+            git reset --hard origin/main
+            npm ci
+            npm run build
+            pm2 restart myne-dashboard
+            pm2 save
+          '"
