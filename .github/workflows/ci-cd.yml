@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI CD
 
 on:
   push:
@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -23,13 +23,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run lint
+      - name: Lint
         run: npm run lint
 
-      - name: Run format check
+      - name: Prettier check
         run: npm run format:check
 
-      - name: Build app
+      - name: Build
         run: npm run build
 
   deploy:
@@ -38,54 +38,29 @@ jobs:
     needs: ci
 
     steps:
-      - name: Setup SSH key
-        shell: bash
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p "${{ secrets.VPS_PORT }}" "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
-
       - name: Deploy over SSH
-        shell: bash
-        run: |
-          ssh -p "${{ secrets.VPS_PORT }}" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "bash -lc '
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
             set -e
-
-            export NVM_DIR=\"$HOME/.nvm\"
-
-            if [ ! -s \"$NVM_DIR/nvm.sh\" ]; then
-              mkdir -p \"$NVM_DIR\"
-              if command -v curl >/dev/null 2>&1; then
-                curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-              elif command -v wget >/dev/null 2>&1; then
-                wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-              else
-                echo \"Neither curl nor wget is available to install nvm\"
-                exit 127
-              fi
+            [ -f "$HOME/.profile" ] && . "$HOME/.profile"
+            [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            if ! command -v npm >/dev/null 2>&1; then
+              echo "npm not found on VPS PATH. Install Node.js/npm for this user or expose it in shell profile."
+              exit 1
             fi
-
-            [ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"
-            nvm install --lts
-            nvm use --lts
-            nvm alias default "lts/*"
-            hash -r
-
-            if ! command -v pm2 >/dev/null 2>&1; then
-              npm install -g pm2
-            fi
-
-            command -v node >/dev/null 2>&1 || { echo \"node: command not found\"; exit 127; }
-            command -v npm >/dev/null 2>&1 || { echo \"npm: command not found\"; exit 127; }
-            command -v pm2 >/dev/null 2>&1 || { echo \"pm2: command not found\"; exit 127; }
-
-            cd \"${{ secrets.VPS_APP_DIR }}\"
+            node -v
+            npm -v
+            cd ${{ secrets.VPS_APP_DIR }}
             git fetch origin
             git reset --hard origin/main
             npm ci
             npm run build
-            pm2 restart myne-dashboard
+            pm2 restart central-player-dashboard
             pm2 save
-          '"
-
