@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import PageTitle from "@/components/others/PageTitle";
 import { APagination } from "@/components/ui/APagination";
 import ModerationContentGrid from "./ModerationContentGrid";
 import ModerationSearchAndTabs from "./ModerationSearchAndTabs";
@@ -45,6 +46,11 @@ const ContentModerationContainer = () => {
 
   return (
     <section className="space-y-6">
+      <PageTitle
+        title="Content Moderation"
+        subTitle="View and manage all user accounts, track active users, and monitor business registrations for a seamless platform experience."
+      />
+
       <ModerationSearchAndTabs
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}

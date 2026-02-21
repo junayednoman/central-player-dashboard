@@ -39,7 +39,7 @@ const OtpVerificationForm = () => {
     },
   });
 
-  const onSubmit = async (_data: TOtpVerificationFormValues) => {
+  const onSubmit = async () => {
     if (!email) {
       toast.error("Email is missing. Please retry from forgot password.");
       return;
@@ -160,3 +160,4 @@ const OtpVerificationForm = () => {
 };
 
 export default OtpVerificationForm;
+

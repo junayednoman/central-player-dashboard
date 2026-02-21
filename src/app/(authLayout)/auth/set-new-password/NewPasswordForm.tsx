@@ -21,17 +21,13 @@ const newPasswordSchema = z
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
-  });
-
-type TNewPasswordFormValues = z.infer<typeof newPasswordSchema>;
-
-const NewPasswordForm = () => {
+  });const NewPasswordForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const onSubmit = async (_data: TNewPasswordFormValues) => {
+  const onSubmit = async () => {
     if (!email) {
       toast.error("Email is missing. Please restart the flow.");
       return;
@@ -95,4 +91,8 @@ const NewPasswordForm = () => {
 };
 
 export default NewPasswordForm;
+
+
+
+
 

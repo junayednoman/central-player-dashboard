@@ -19,14 +19,14 @@ export const navItems: TNavMain = [
     icon: <UserRoundCog />,
   },
   {
-    title: "Content Moderation",
-    url: "/dashboard/content-moderation",
-    icon: <CircleAlert />,
-  },
-  {
     title: "Subscription",
     url: "/dashboard/subscription",
     icon: <BadgeDollarSign />,
+  },
+  {
+    title: "Moderation",
+    url: "/dashboard/content-moderation",
+    icon: <CircleAlert />,
   },
   {
     title: "Notifications",

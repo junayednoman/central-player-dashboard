@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import * as z from "zod";
 import { useState } from "react";
 
 import AForm from "@/components/form/AForm";
@@ -21,7 +20,7 @@ const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const onSubmit = async (_data: z.infer<typeof loginSchema>) => {
+  const onSubmit = async () => {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
@@ -91,3 +90,5 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+

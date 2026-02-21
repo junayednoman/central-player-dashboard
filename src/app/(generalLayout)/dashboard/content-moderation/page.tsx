@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import ContentModerationContainer from "./_components/ContentModerationContainer";
 
 export const metadata: Metadata = {
-  title: "Content Moderation",
+  title: "Moderation",
 };
 
 const ContentModerationPage = () => {

@@ -18,9 +18,9 @@ const ModerationViolationPanel = ({ reasons }: ModerationViolationPanelProps) =>
 
   return (
     <div className="rounded-2xl border border-border bg-black p-5">
-      <h2 className="text-[34px] font-medium text-white">Community guidelines violated</h2>
+      <h2 className="text-2xl font-medium text-white">Community guidelines violated</h2>
 
-      <div className="mt-5 space-y-3">
+      <div className="mt-5 mb-10 space-y-3">
         {reasons.map((reason, index) => (
           <div
             key={`${reason}-${index}`}
@@ -32,7 +32,7 @@ const ModerationViolationPanel = ({ reasons }: ModerationViolationPanelProps) =>
         ))}
       </div>
 
-      <div className="mt-8 space-y-4">
+      <div className="space-y-4">
         <Button
           variant="destructive"
           className="h-12 w-full rounded-xl text-base"
@@ -54,3 +54,4 @@ const ModerationViolationPanel = ({ reasons }: ModerationViolationPanelProps) =>
 };
 
 export default ModerationViolationPanel;
+

@@ -1,17 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
-import dynamic from "next/dynamic";
-
-// Dynamically import JoditEditor to avoid SSR issues
-const JoditEditor = dynamic(() => import("jodit-react"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-96 bg-background border border-border rounded-lg flex items-center justify-center">
-      <div className="text-muted-foreground">Loading editor...</div>
-    </div>
-  ),
-});
+import { useEffect, useMemo, useRef } from "react";
 
 interface JoditTextEditorProps {
   content: string;
@@ -19,17 +8,38 @@ interface JoditTextEditorProps {
   placeholder?: string;
 }
 
+type JoditModule = {
+  Jodit: {
+    make: (element: HTMLElement, config: Record<string, unknown>) => {
+      value: string;
+      events: {
+        on: (event: string, cb: (...args: unknown[]) => void) => void;
+        off: (event: string, cb: (...args: unknown[]) => void) => void;
+      };
+      destruct: () => void;
+    };
+  };
+};
+
 const JoditTextEditor = ({
   content,
   onChange,
   placeholder = "Start writing...",
 }: JoditTextEditorProps) => {
-  const editor = useRef(null);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  const editorRef = useRef<{
+    value: string;
+    events: {
+      on: (event: string, cb: (...args: unknown[]) => void) => void;
+      off: (event: string, cb: (...args: unknown[]) => void) => void;
+    };
+    destruct: () => void;
+  } | null>(null);
 
   const config = useMemo(
     () => ({
       readonly: false,
-      placeholder: placeholder,
+      placeholder,
       height: 600,
       theme: "dark",
       style: {
@@ -94,16 +104,54 @@ const JoditTextEditor = ({
     [placeholder]
   );
 
+  useEffect(() => {
+    let isMounted = true;
+
+    const setup = async () => {
+      if (!textAreaRef.current) return;
+
+      const mod = (await import("jodit/esm/index.js")) as JoditModule;
+      if (!isMounted || !textAreaRef.current) return;
+
+      const editor = mod.Jodit.make(textAreaRef.current, config);
+      editorRef.current = editor;
+      editor.value = content;
+
+      const handleBlur = (nextValue: unknown) => {
+        onChange(typeof nextValue === "string" ? nextValue : editor.value);
+      };
+
+      editor.events.on("blur", handleBlur);
+
+      const cleanup = () => {
+        editor.events.off("blur", handleBlur);
+      };
+
+      (editor as unknown as { __cleanup?: () => void }).__cleanup = cleanup;
+    };
+
+    setup();
+
+    return () => {
+      isMounted = false;
+      const editor = editorRef.current as (typeof editorRef.current & {
+        __cleanup?: () => void;
+      }) | null;
+      editor?.__cleanup?.();
+      editor?.destruct();
+      editorRef.current = null;
+    };
+  }, [config, onChange, content]);
+
+  useEffect(() => {
+    if (editorRef.current && editorRef.current.value !== content) {
+      editorRef.current.value = content;
+    }
+  }, [content]);
+
   return (
     <div className="h-fit">
-      <JoditEditor
-        ref={editor}
-        value={content}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        config={config}
-        onBlur={(newContent) => onChange(newContent)}
-      />
+      <textarea ref={textAreaRef} defaultValue={content} />
     </div>
   );
 };

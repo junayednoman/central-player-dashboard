@@ -14,6 +14,7 @@ export type ModerationContentItem = {
   views: string;
   timeAgo: string;
   imageUrl: string;
+  videoUrl?: string;
   isReported: boolean;
   category: Exclude<ModerationCategory, "all" | "reported">;
   violationReasons?: string[];
@@ -42,6 +43,7 @@ export const moderationMockData: ModerationContentItem[] = [
     timeAgo: "30 mins",
     imageUrl:
       "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
     isReported: true,
     category: "featured",
     violationReasons: [
