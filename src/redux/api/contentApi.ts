@@ -6,9 +6,9 @@ const contentApi = baseApi.injectEndpoints({
       query: (params) => ({
         url: "/contents",
         method: "GET",
-        params
+        params,
       }),
-      providesTags: ["content"]
+      providesTags: ["content"],
     }),
     updateContent: builder.mutation({
       query: (data) => ({
@@ -16,9 +16,9 @@ const contentApi = baseApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["content"]
-    })
+      invalidatesTags: ["content"],
+    }),
   }),
-})
+});
 
 export const { useGetContentsQuery, useUpdateContentMutation } = contentApi;

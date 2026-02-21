@@ -11,37 +11,43 @@ const people = [
     id: 1,
     name: "Sarah Johnson",
     email: "johnsonsarah@gmail.com",
-    avatar: "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
+    avatar:
+      "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
   },
   {
     id: 2,
     name: "Sarah Johnson",
     email: "johnsonsarah@gmail.com",
-    avatar: "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
+    avatar:
+      "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
   },
   {
     id: 3,
     name: "Sarah Johnson",
     email: "johnsonsarah@gmail.com",
-    avatar: "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
+    avatar:
+      "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
   },
   {
     id: 4,
     name: "Sarah Johnson",
     email: "johnsonsarah@gmail.com",
-    avatar: "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
+    avatar:
+      "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
   },
   {
     id: 5,
     name: "Sarah Johnson",
     email: "johnsonsarah@gmail.com",
-    avatar: "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
+    avatar:
+      "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
   },
   {
     id: 6,
     name: "Sarah Johnson",
     email: "johnsonsarah@gmail.com",
-    avatar: "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
+    avatar:
+      "https://static.vecteezy.com/system/resources/previews/023/402/465/non_2x/man-avatar-free-vector.jpg",
   },
 ];
 

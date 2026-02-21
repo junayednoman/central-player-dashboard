@@ -1,17 +1,16 @@
-
 import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import { RootState } from "../store";
 
 type TAuthType = {
-  user: null | { email: string, role: "admin" },
+  user: null | { email: string; role: "admin" };
   token: null | string;
-}
+};
 
 const initialState: TAuthType = {
   user: null,
   token: null,
-}
+};
 
 const authSlice = createSlice({
   name: "auth",
@@ -30,9 +29,9 @@ const authSlice = createSlice({
       state.token = null;
       // Remove token for cookies
       Cookies.remove("accessToken", { path: "/" });
-    }
-  }
-})
+    },
+  },
+});
 
 export const { setUser, logOut } = authSlice.actions;
 export default authSlice.reducer;

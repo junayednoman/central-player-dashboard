@@ -7,9 +7,9 @@ const earningApi = baseApi.injectEndpoints({
         url: "/payments/dashboard-data",
         method: "GET",
       }),
-      providesTags: ["earning"]
+      providesTags: ["earning"],
     }),
   }),
-})
+});
 
 export const { useGetEarningsQuery } = earningApi;

@@ -1,7 +1,10 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { ModerationCategory, moderationCategoryOptions } from "./moderation.mock";
+import {
+  ModerationCategory,
+  moderationCategoryOptions,
+} from "./moderation.mock";
 
 type ModerationSearchAndTabsProps = {
   searchTerm: string;

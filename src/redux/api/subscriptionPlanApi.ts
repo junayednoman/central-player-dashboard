@@ -8,15 +8,15 @@ const subscriptionPlanApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["plans"]
+      invalidatesTags: ["plans"],
     }),
     getAllPlans: builder.query({
       query: (params) => ({
         url: "/packages",
         method: "GET",
-        params
+        params,
       }),
-      providesTags: ["plans"]
+      providesTags: ["plans"],
     }),
     updatePlan: builder.mutation({
       query: (data) => ({
@@ -24,16 +24,21 @@ const subscriptionPlanApi = baseApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["plans"]
+      invalidatesTags: ["plans"],
     }),
     deletePlan: builder.mutation({
       query: (id) => ({
         url: `/packages/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["plans"]
-    })
+      invalidatesTags: ["plans"],
+    }),
   }),
-})
+});
 
-export const { useAddPlanMutation, useGetAllPlansQuery, useUpdatePlanMutation, useDeletePlanMutation } = subscriptionPlanApi;
+export const {
+  useAddPlanMutation,
+  useGetAllPlansQuery,
+  useUpdatePlanMutation,
+  useDeletePlanMutation,
+} = subscriptionPlanApi;

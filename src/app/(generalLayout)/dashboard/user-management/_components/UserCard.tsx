@@ -22,7 +22,9 @@ export function UserCard() {
 
         <div className="flex flex-col">
           Junayed Noman
-          <p className="text-sm text-muted-foreground">junayednoman@gmail.com</p>
+          <p className="text-sm text-muted-foreground">
+            junayednoman@gmail.com
+          </p>
         </div>
 
         <div>

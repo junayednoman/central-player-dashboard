@@ -10,7 +10,10 @@ interface JoditTextEditorProps {
 
 type JoditModule = {
   Jodit: {
-    make: (element: HTMLElement, config: Record<string, unknown>) => {
+    make: (
+      element: HTMLElement,
+      config: Record<string, unknown>,
+    ) => {
       value: string;
       events: {
         on: (event: string, cb: (...args: unknown[]) => void) => void;
@@ -101,7 +104,7 @@ const JoditTextEditor = ({
         },
       },
     }),
-    [placeholder]
+    [placeholder],
   );
 
   useEffect(() => {
@@ -134,9 +137,11 @@ const JoditTextEditor = ({
 
     return () => {
       isMounted = false;
-      const editor = editorRef.current as (typeof editorRef.current & {
-        __cleanup?: () => void;
-      }) | null;
+      const editor = editorRef.current as
+        | (typeof editorRef.current & {
+            __cleanup?: () => void;
+          })
+        | null;
       editor?.__cleanup?.();
       editor?.destruct();
       editorRef.current = null;

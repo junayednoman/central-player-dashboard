@@ -28,7 +28,7 @@ interface ADateTimePickerProps<TFieldValues extends FieldValues = FieldValues> {
 }
 
 export function ADateTimePicker<
-  TFieldValues extends FieldValues = FieldValues
+  TFieldValues extends FieldValues = FieldValues,
 >({
   name,
   label,
@@ -56,7 +56,7 @@ export function ADateTimePicker<
                 className={cn(
                   "w-full justify-between text-left font-normal",
                   !field.value && "text-muted-foreground",
-                  "border-border bg-transparent h-13 rounded-full pr-4 pl-3"
+                  "border-border bg-transparent h-13 rounded-full pr-4 pl-3",
                 )}
                 disabled={disabled}
               >
@@ -85,7 +85,7 @@ export function ADateTimePicker<
                           field.value.getHours(),
                           field.value.getMinutes(),
                           0,
-                          0
+                          0,
                         );
                       }
                       field.onChange(newDate);
@@ -110,7 +110,7 @@ export function ADateTimePicker<
                         parseInt(hours, 10),
                         parseInt(minutes, 10),
                         0,
-                        0
+                        0,
                       );
                       field.onChange(newDate);
                     }}

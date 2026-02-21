@@ -20,7 +20,6 @@ const chartData = [
   { month: "30", value: 60 },
 ];
 
-
 const chartConfig = {
   value: {
     label: "Users",

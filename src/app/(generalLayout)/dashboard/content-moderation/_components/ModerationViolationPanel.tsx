@@ -7,7 +7,9 @@ type ModerationViolationPanelProps = {
   reasons: string[];
 };
 
-const ModerationViolationPanel = ({ reasons }: ModerationViolationPanelProps) => {
+const ModerationViolationPanel = ({
+  reasons,
+}: ModerationViolationPanelProps) => {
   const onRemoveContent = () => {
     console.log("Content removed");
   };
@@ -18,7 +20,9 @@ const ModerationViolationPanel = ({ reasons }: ModerationViolationPanelProps) =>
 
   return (
     <div className="rounded-2xl border border-border bg-black p-5">
-      <h2 className="text-2xl font-medium text-white">Community guidelines violated</h2>
+      <h2 className="text-2xl font-medium text-white">
+        Community guidelines violated
+      </h2>
 
       <div className="mt-5 mb-10 space-y-3">
         {reasons.map((reason, index) => (
@@ -54,4 +58,3 @@ const ModerationViolationPanel = ({ reasons }: ModerationViolationPanelProps) =>
 };
 
 export default ModerationViolationPanel;
-

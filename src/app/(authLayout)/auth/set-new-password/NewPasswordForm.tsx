@@ -21,7 +21,8 @@ const newPasswordSchema = z
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
-  });const NewPasswordForm = () => {
+  });
+const NewPasswordForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
@@ -47,7 +48,9 @@ const newPasswordSchema = z
     <>
       <div className="w-[600px] rounded-2xl border bg-card p-8 py-10">
         <div className="mb-20 text-center">
-          <h1 className="text-[32px] text-white font-bold mb-2">Reset Password</h1>
+          <h1 className="text-[32px] text-white font-bold mb-2">
+            Reset Password
+          </h1>
           <p className="text-card-foreground text-sm mx-32">
             Set your new password to regain access to your account.
           </p>
@@ -76,7 +79,11 @@ const newPasswordSchema = z
             required
           />
 
-          <Button type="submit" className="h-14 w-full" disabled={showSuccessModal}>
+          <Button
+            type="submit"
+            className="h-14 w-full"
+            disabled={showSuccessModal}
+          >
             Submit
           </Button>
         </AForm>
@@ -91,8 +98,3 @@ const newPasswordSchema = z
 };
 
 export default NewPasswordForm;
-
-
-
-
-

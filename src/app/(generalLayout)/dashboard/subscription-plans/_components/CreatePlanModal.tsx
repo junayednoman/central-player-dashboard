@@ -33,7 +33,7 @@ const CreatePlanModal = ({ children }: CreatePlanModalProps) => {
       price: Number(data.price),
     };
     handleMutation(payload, addPlan, "Creating plan...", () =>
-      setIsOpen(false)
+      setIsOpen(false),
     );
   };
 

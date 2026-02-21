@@ -71,8 +71,7 @@ export const moderationMockData: ModerationContentItem[] = [
     id: "cm-3",
     authorName: "Alex Brooks",
     authorEmail: "alex.brooks@mail.com",
-    description:
-      "Challenge day: 100 passes in 3 minutes. Who can beat this?",
+    description: "Challenge day: 100 passes in 3 minutes. Who can beat this?",
     hashtags: ["#Challenge", "#PassMaster", "#GrassrootsFootball"],
     views: "56K Views",
     timeAgo: "2 hrs",

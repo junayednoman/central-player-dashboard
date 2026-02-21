@@ -12,7 +12,8 @@ const PAGE_SIZE = 6;
 const ContentModerationContainer = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [activeCategory, setActiveCategory] = useState<ModerationCategory>("all");
+  const [activeCategory, setActiveCategory] =
+    useState<ModerationCategory>("all");
 
   const filteredItems = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();

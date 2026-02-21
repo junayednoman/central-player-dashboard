@@ -7,20 +7,20 @@ const profileApi = baseApi.injectEndpoints({
         url: "/profiles/my-profile",
         method: "GET",
       }),
-      providesTags: ["profile"]
+      providesTags: ["profile"],
     }),
     updateProfile: builder.mutation({
       query: (data) => {
-        console.log('data33', data);
+        console.log("data33", data);
         return {
           url: "/profiles/update-my-profile",
           method: "PUT",
           body: data,
-        }
+        };
       },
-      invalidatesTags: ["profile"]
-    })
+      invalidatesTags: ["profile"],
+    }),
   }),
-})
+});
 
 export const { useGetProfileQuery, useUpdateProfileMutation } = profileApi;

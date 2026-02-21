@@ -6,11 +6,11 @@ const dashboardApi = baseApi.injectEndpoints({
       query: (params) => ({
         url: "/meta",
         method: "GET",
-        params
+        params,
       }),
-      providesTags: ["meta"]
+      providesTags: ["meta"],
     }),
   }),
-})
+});
 
 export const { useGetMetaQuery } = dashboardApi;

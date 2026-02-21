@@ -17,4 +17,4 @@ export const settingData = [
     content:
       "<h1>Privacy Policy</h1><p>Your privacy is important to us. This policy explains how we collect and use your data...</p>",
   },
-]
+];

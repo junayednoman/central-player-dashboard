@@ -66,7 +66,9 @@ const SubscriptionEditor = ({
         </div>
 
         <div className="space-y-2">
-          <p className="text-[28px] font-medium text-white">Enter Subscription Tag</p>
+          <p className="text-[28px] font-medium text-white">
+            Enter Subscription Tag
+          </p>
           <div className="inline-flex items-center gap-3 rounded-xl border border-border px-4 py-2.5">
             <span className="text-lg text-white">{tag}</span>
             <Pencil className="h-4 w-4 text-[#A2A2A7]" />

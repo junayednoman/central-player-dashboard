@@ -70,7 +70,9 @@ const OtpVerificationForm = () => {
     <>
       <div className="w-[600px] rounded-2xl border bg-card p-8 py-10">
         <div className="mb-16 text-center">
-          <h1 className="text-[32px] text-white font-bold mb-2">Recover Password</h1>
+          <h1 className="text-[32px] text-white font-bold mb-2">
+            Recover Password
+          </h1>
           <p className="text-card-foreground text-sm mx-12">
             Please provide the email address associated with your account, and
             we&apos;ll send you verification code to reset your password.
@@ -143,7 +145,11 @@ const OtpVerificationForm = () => {
                 </p>
               </div>
 
-              <Button type="submit" className="w-full h-12" disabled={showSuccessModal}>
+              <Button
+                type="submit"
+                className="w-full h-12"
+                disabled={showSuccessModal}
+              >
                 Verify OTP
               </Button>
             </form>
@@ -160,4 +166,3 @@ const OtpVerificationForm = () => {
 };
 
 export default OtpVerificationForm;
-

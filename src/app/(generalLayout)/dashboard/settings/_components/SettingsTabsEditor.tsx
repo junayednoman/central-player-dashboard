@@ -42,8 +42,8 @@ const SettingsTabsEditor = () => {
   const handleContentChange = (sectionId: string, content: string) => {
     setContentSections((prev) =>
       prev.map((section) =>
-        section.id === sectionId ? { ...section, content } : section
-      )
+        section.id === sectionId ? { ...section, content } : section,
+      ),
     );
     setSavedStates((prev) => ({ ...prev, [sectionId]: false }));
   };

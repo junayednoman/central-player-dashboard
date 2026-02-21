@@ -6,19 +6,19 @@ const userApi = baseApi.injectEndpoints({
       query: (params) => ({
         url: "/profiles",
         method: "GET",
-        params
+        params,
       }),
-      providesTags: ["user"]
+      providesTags: ["user"],
     }),
     changeUseStatus: builder.mutation({
       query: (data) => ({
         url: `/profiles/change-status`,
         method: "PATCH",
-        body: data
+        body: data,
       }),
-      invalidatesTags: ["user"]
+      invalidatesTags: ["user"],
     }),
   }),
-})
+});
 
 export const { useGetUsersQuery, useChangeUseStatusMutation } = userApi;

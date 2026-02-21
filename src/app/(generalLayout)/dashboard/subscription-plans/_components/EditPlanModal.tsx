@@ -45,7 +45,7 @@ const EditPlanModal = ({ children, plan }: EditPlanModalProps) => {
       price: Number(data.price),
     };
     handleMutation(payload, updatePlan, "Updating plan...", () =>
-      setIsOpen(false)
+      setIsOpen(false),
     );
   };
 

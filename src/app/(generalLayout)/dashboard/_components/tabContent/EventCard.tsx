@@ -47,7 +47,9 @@ export function EventCard({
       </div>
 
       <div className="flex items-center gap-1">
-        {detailsLabel ? <p className="text-sm font-medium">{detailsLabel}</p> : null}
+        {detailsLabel ? (
+          <p className="text-sm font-medium">{detailsLabel}</p>
+        ) : null}
         <ChevronRight className="h-4 w-4 text-muted-foreground" />
       </div>
     </Link>

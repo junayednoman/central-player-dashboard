@@ -8,14 +8,14 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: credentials,
       }),
-      invalidatesTags: ["auth"]
+      invalidatesTags: ["auth"],
     }),
     logout: builder.mutation({
       query: () => ({
         url: "/auth/logout",
-        method: "PATCH"
+        method: "PATCH",
       }),
-      invalidatesTags: ["auth"]
+      invalidatesTags: ["auth"],
     }),
     changePassword: builder.mutation({
       query: (credentials) => ({
@@ -23,7 +23,7 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: credentials,
       }),
-      invalidatesTags: ["auth"]
+      invalidatesTags: ["auth"],
     }),
     forgetPassword: builder.mutation({
       query: (credentials) => ({
@@ -37,7 +37,7 @@ const authApi = baseApi.injectEndpoints({
         url: "/otp/verify-otp",
         method: "POST",
         headers: {
-          "Authorization": `${token}`
+          Authorization: `${token}`,
         },
         body: credentials,
       }),
@@ -47,12 +47,19 @@ const authApi = baseApi.injectEndpoints({
         url: "/auth/reset-password",
         method: "POST",
         headers: {
-          "Authorization": `${token}`
+          Authorization: `${token}`,
         },
         body: credentials,
       }),
-    })
+    }),
   }),
-})
+});
 
-export const { useLoginMutation, useLogoutMutation, useChangePasswordMutation, useForgetPasswordMutation, useVerifyOtpMutation, useResetPasswordMutation } = authApi;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useChangePasswordMutation,
+  useForgetPasswordMutation,
+  useVerifyOtpMutation,
+  useResetPasswordMutation,
+} = authApi;

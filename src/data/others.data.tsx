@@ -46,5 +46,5 @@ export const months = [
   {
     name: "December",
     value: "december",
-  }
+  },
 ];

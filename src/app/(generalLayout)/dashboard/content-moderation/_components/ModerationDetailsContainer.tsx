@@ -11,7 +11,9 @@ type ModerationDetailsContainerProps = {
 
 const FALLBACK_VIDEO_URL = "https://www.w3schools.com/html/mov_bbb.mp4";
 
-const ModerationDetailsContainer = ({ item }: ModerationDetailsContainerProps) => {
+const ModerationDetailsContainer = ({
+  item,
+}: ModerationDetailsContainerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -40,7 +42,10 @@ const ModerationDetailsContainer = ({ item }: ModerationDetailsContainerProps) =
               onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
             >
-              <source src={item.videoUrl ?? FALLBACK_VIDEO_URL} type="video/mp4" />
+              <source
+                src={item.videoUrl ?? FALLBACK_VIDEO_URL}
+                type="video/mp4"
+              />
             </video>
 
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-black/15" />
@@ -63,8 +68,12 @@ const ModerationDetailsContainer = ({ item }: ModerationDetailsContainerProps) =
                 isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
               }`}
             >
-              <p className="text-xl leading-snug text-white">{item.description}</p>
-              <p className="text-base text-[#D0B53D]">{item.hashtags.join(" ")}</p>
+              <p className="text-xl leading-snug text-white">
+                {item.description}
+              </p>
+              <p className="text-base text-[#D0B53D]">
+                {item.hashtags.join(" ")}
+              </p>
               <div className="flex items-center gap-3 text-lg text-[#D5D5D5]">
                 <span>{item.timeAgo}</span>
                 <Eye className="h-4 w-4" />

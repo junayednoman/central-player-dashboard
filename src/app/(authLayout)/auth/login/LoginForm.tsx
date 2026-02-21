@@ -8,7 +8,7 @@ import { AInput } from "@/components/form/AInput";
 import { Button } from "@/components/ui/button";
 
 import { loginSchema } from "@/validations/auth.validation";
-import { ACheckbox } from "@/components/form/ACheckbox"; 
+import { ACheckbox } from "@/components/form/ACheckbox";
 import Link from "next/link";
 import { toast } from "sonner";
 import LoginSuccessModal from "../_components/LoginSuccessModal";
@@ -90,5 +90,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-
