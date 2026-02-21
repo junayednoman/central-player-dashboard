@@ -53,9 +53,28 @@ jobs:
             set -e
 
             export NVM_DIR=\"$HOME/.nvm\"
+
+            if [ ! -s \"$NVM_DIR/nvm.sh\" ]; then
+              mkdir -p \"$NVM_DIR\"
+              if command -v curl >/dev/null 2>&1; then
+                curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+              elif command -v wget >/dev/null 2>&1; then
+                wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+              else
+                echo \"Neither curl nor wget is available to install nvm\"
+                exit 127
+              fi
+            fi
+
             [ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"
-            [ -s \"$HOME/.profile\" ] && . \"$HOME/.profile\" || true
-            [ -s \"$HOME/.bashrc\" ] && . \"$HOME/.bashrc\" || true
+            nvm install --lts
+            nvm use --lts
+            nvm alias default "lts/*"
+            hash -r
+
+            if ! command -v pm2 >/dev/null 2>&1; then
+              npm install -g pm2
+            fi
 
             command -v node >/dev/null 2>&1 || { echo \"node: command not found\"; exit 127; }
             command -v npm >/dev/null 2>&1 || { echo \"npm: command not found\"; exit 127; }
@@ -69,3 +88,4 @@ jobs:
             pm2 restart myne-dashboard
             pm2 save
           '"
+
