@@ -67,7 +67,6 @@ const ModerationDetailsContainer = ({ item }: ModerationDetailsContainerProps) =
               <p className="text-base text-[#D0B53D]">{item.hashtags.join(" ")}</p>
               <div className="flex items-center gap-3 text-lg text-[#D5D5D5]">
                 <span>{item.timeAgo}</span>
-                <span>◉</span>
                 <Eye className="h-4 w-4" />
                 <span>{item.views}</span>
               </div>

@@ -80,7 +80,6 @@ const ModerationContentCard = ({
           <p className="line-clamp-1 text-xs text-[#D0B53D]">{item.hashtags.join(" ")}</p>
           <div className="flex items-center gap-2 text-xs text-[#D5D5D5]">
             <span>{item.timeAgo}</span>
-            <span>◉</span>
             <Eye className="h-3.5 w-3.5" />
             <span>{item.views}</span>
           </div>
