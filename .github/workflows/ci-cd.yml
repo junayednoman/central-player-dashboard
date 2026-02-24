@@ -21,7 +21,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=dev --include=optional
 
       - name: Lint
         run: npm run lint
@@ -60,7 +60,7 @@ jobs:
             cd ${{ secrets.VPS_APP_DIR }}
             git fetch origin
             git reset --hard origin/main
-            npm ci
+            npm ci --include=dev --include=optional
             npm run build
             pm2 restart central-player-dashboard
             pm2 save
