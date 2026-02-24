@@ -276,7 +276,8 @@ const EarnigsContainer = () => {
 
   const dateRangeLabel = useMemo(() => {
     if (!dateRange?.from) return "Pick date range";
-    if (dateRange.from && !dateRange.to) return format(dateRange.from, "MMM dd, yyyy");
+    if (dateRange.from && !dateRange.to)
+      return format(dateRange.from, "MMM dd, yyyy");
 
     return `${format(dateRange.from, "MMM dd, yyyy")} - ${format(
       dateRange.to as Date,
@@ -306,7 +307,10 @@ const EarnigsContainer = () => {
                 <CalendarDays className="h-4 w-4" />
               </button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto border-border bg-card p-0" align="end">
+            <PopoverContent
+              className="w-auto border-border bg-card p-0"
+              align="end"
+            >
               <Calendar
                 mode="range"
                 selected={dateRange}
