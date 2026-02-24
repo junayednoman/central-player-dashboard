@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -51,15 +51,18 @@ jobs:
             [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            if ! command -v npm >/dev/null 2>&1; then
-              echo "npm not found on VPS PATH. Install Node.js/npm for this user or expose it in shell profile."
+            if ! command -v nvm >/dev/null 2>&1; then
+              echo "nvm is required on VPS to enforce Node runtime from .nvmrc."
               exit 1
             fi
-            node -v
-            npm -v
             cd ${{ secrets.VPS_APP_DIR }}
             git fetch origin
             git reset --hard origin/main
+            NODE_VERSION="$(cat .nvmrc)"
+            nvm install "$NODE_VERSION"
+            nvm use "$NODE_VERSION"
+            node -v
+            npm -v
             npm ci --include=dev --include=optional
             npm run build
             pm2 restart central-player-dashboard
