@@ -2,6 +2,7 @@ import {
   BadgeDollarSign,
   Bell,
   CircleAlert,
+  HandCoins,
   Settings,
   UserRoundCog,
 } from "lucide-react";
@@ -22,6 +23,11 @@ export const navItems: TNavMain = [
     title: "Subscription",
     url: "/dashboard/subscription",
     icon: <BadgeDollarSign />,
+  },
+  {
+    title: "Earnigs",
+    url: "/dashboard/earnigs",
+    icon: <HandCoins />,
   },
   {
     title: "Moderation",
