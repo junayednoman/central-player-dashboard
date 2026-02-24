@@ -58,8 +58,18 @@ jobs:
             cd ${{ secrets.VPS_APP_DIR }}
             git fetch origin
             git reset --hard origin/main
-            NODE_VERSION="$(cat .nvmrc)"
-            nvm install "$NODE_VERSION"
+            NODE_VERSION="$(tr -d '[:space:]' < .nvmrc)"
+            if [ -z "$NODE_VERSION" ]; then
+              echo ".nvmrc is empty. Set a valid Node version (example: 20.19.0)."
+              exit 1
+            fi
+            if nvm ls "$NODE_VERSION" | grep -q "N/A"; then
+              echo "Node $NODE_VERSION is not installed on VPS."
+              echo "Run once on VPS:"
+              echo "  nvm install $NODE_VERSION"
+              echo "  nvm alias default $NODE_VERSION"
+              exit 1
+            fi
             nvm use "$NODE_VERSION"
             node -v
             npm -v
