@@ -3,6 +3,7 @@ import {
   Bell,
   CircleAlert,
   HandCoins,
+  MessageCircle,
   Settings,
   UserRoundCog,
 } from "lucide-react";
@@ -38,6 +39,11 @@ export const navItems: TNavMain = [
     title: "Notifications",
     url: "/dashboard/notifications",
     icon: <Bell />,
+  },
+  {
+    title: "Support Messages",
+    url: "/dashboard/support-messages",
+    icon: <MessageCircle />,
   },
   {
     title: "Settings",

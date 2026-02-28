@@ -250,6 +250,31 @@ const EarnigsContainer = () => {
     to: new Date(),
   });
   const itemsPerPage = 6;
+  const currencyFormatter = useMemo(
+    () => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }),
+    [],
+  );
+
+  const roleTotals = useMemo(
+    () =>
+      rows.reduce<Record<Role, number>>(
+        (acc, row) => {
+          acc[row.role] += row.amount;
+          return acc;
+        },
+        { player: 0, coach: 0, scout: 0 },
+      ),
+    [],
+  );
+
+  const summaryCards = useMemo(
+    () => [
+      { role: "player" as const, title: "Player Subscription" },
+      { role: "coach" as const, title: "Coach Subscription" },
+      { role: "scout" as const, title: "Scout Subscription" },
+    ],
+    [],
+  );
 
   const filteredRows = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -292,40 +317,51 @@ const EarnigsContainer = () => {
         subTitle="View and update your personal information, change passwords for a personalized experience"
       />
 
-      <div className="w-full max-w-[360px] rounded-2xl bg-linear-to-br from-zinc-800 to-zinc-900 p-5 shadow-md">
-        <div className="flex items-start justify-between">
-          <h3 className="text-[32px] leading-none font-semibold text-foreground">
-            Total Earning
-          </h3>
-          <Popover>
-            <PopoverTrigger asChild>
-              <button
-                type="button"
-                className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-white text-blue-500 transition hover:opacity-90"
-                aria-label="Select date range"
-              >
-                <CalendarDays className="h-4 w-4" />
-              </button>
-            </PopoverTrigger>
-            <PopoverContent
-              className="w-auto border-border bg-card p-0"
-              align="end"
-            >
-              <Calendar
-                mode="range"
-                selected={dateRange}
-                onSelect={setDateRange}
-                numberOfMonths={2}
-                className="bg-card border-border"
-              />
-            </PopoverContent>
-          </Popover>
-        </div>
-        <div className="mt-4 flex items-center gap-2 text-muted-foreground">
-          <DollarSign className="h-4 w-4" />
-          <span className="text-lg font-medium">15K+</span>
-        </div>
-        <p className="mt-2 text-sm text-muted-foreground">{dateRangeLabel}</p>
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {summaryCards.map((card) => (
+          <div
+            key={card.role}
+            className="w-full rounded-2xl bg-linear-to-br from-zinc-800 to-zinc-900 p-5 shadow-md"
+          >
+            <div className="flex items-start justify-between">
+              <h3 className="text-[28px] leading-none font-semibold text-foreground sm:text-[30px]">
+                {card.title}
+              </h3>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button
+                    type="button"
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-white text-blue-500 transition hover:opacity-90"
+                    aria-label="Select date range"
+                  >
+                    <CalendarDays className="h-4 w-4" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-auto border-border bg-card p-0"
+                  align="end"
+                >
+                  <Calendar
+                    mode="range"
+                    selected={dateRange}
+                    onSelect={setDateRange}
+                    numberOfMonths={2}
+                    className="bg-card border-border"
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="mt-4 flex items-center gap-2 text-muted-foreground">
+              <DollarSign className="h-4 w-4" />
+              <span className="text-lg font-medium">
+                {currencyFormatter.format(roleTotals[card.role])}
+              </span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {dateRangeLabel}
+            </p>
+          </div>
+        ))}
       </div>
 
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
