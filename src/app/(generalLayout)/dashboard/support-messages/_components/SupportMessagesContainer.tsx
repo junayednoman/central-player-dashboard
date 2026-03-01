@@ -73,8 +73,7 @@ const initialRows: SupportRow[] = [
     avatar:
       "https://img.freepik.com/free-photo/medium-shot-smiley-man-posing_23-2149915909.jpg",
     subject: "Account access issue",
-    message:
-      "I can’t access my account since yesterday. Please reset access.",
+    message: "I can’t access my account since yesterday. Please reset access.",
     status: "open",
     date: "Sep 15, 2025",
   },
@@ -96,8 +95,7 @@ const initialRows: SupportRow[] = [
     avatar:
       "https://img.freepik.com/free-photo/close-up-portrait-handsome-smiling-young-man_171337-1184.jpg",
     subject: "Profile update",
-    message:
-      "My profile image isn't updating after upload. Can you help?",
+    message: "My profile image isn't updating after upload. Can you help?",
     status: "resolved",
     date: "Sep 13, 2025",
   },

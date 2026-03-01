@@ -251,7 +251,8 @@ const EarnigsContainer = () => {
   });
   const itemsPerPage = 6;
   const currencyFormatter = useMemo(
-    () => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }),
+    () =>
+      new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }),
     [],
   );
 
